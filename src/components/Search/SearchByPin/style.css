@@ -1,6 +1,8 @@
 .search-by-pin {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .pin-input-box {
@@ -24,6 +26,7 @@
 .error-message {
   color: #d8000c;
   margin: 10px auto;
+  text-align: center;
 }
 
 .select-input {
@@ -32,6 +35,7 @@
   margin-top: 10px;
   margin-bottom: 25px;
 }
+
 
 .submit-search-by-pin-wrapper {
   width: 100%;

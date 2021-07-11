@@ -44,6 +44,10 @@ a {
 
 
 @media screen and (max-width: 400px) {
+    .header {
+        width: 105vw;
+        overflow-y: hidden;
+    }
     .logo-img-wrapper {
         margin: 0 20px;
     }

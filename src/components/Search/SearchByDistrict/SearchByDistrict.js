@@ -64,10 +64,18 @@ const SearchByDistrict = () => {
         }
     }
 
+    const isToday = (someDate) => {
+        const today = new Date();
+        return someDate.getDate() === today.getDate() &&
+            someDate.getMonth() === today.getMonth() &&
+            someDate.getFullYear() === today.getFullYear()
+    }
+
     const submitSearch = () => {
         const currentDate = new Date();
-        if(!(new Date(selectedDate) > currentDate)) {
+        if(new Date(selectedDate) < currentDate && !isToday(new Date(selectedDate))) {
             setError('Please select a valid date');
+            console.log(new Date(selectedDate) === currentDate);
             return;
         }
         setError('');

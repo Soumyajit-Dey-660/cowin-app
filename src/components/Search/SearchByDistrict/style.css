@@ -33,9 +33,9 @@
 }
 
 .error-message {
-  margin: 10px 0px;
   color: #d8000c;
   margin: 0 auto;
+  text-align: center;
 }
 
 @media screen and (max-width: 400px) {

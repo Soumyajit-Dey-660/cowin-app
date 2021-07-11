@@ -28,13 +28,20 @@ const SearchByPin = () => {
     const getSearchResults = async () => {
         try {
             setLoading(true);
-            const { data: { centers } } = await axios.get(`${cowinAPI}/appointment/sessions/public/calendarByPin?pincode=${pincode}&date=${getCorrectDateFormat(selectedDate)}`);
-            setSearchResults(centers);
+            const { data: { sessions } } = await axios.get(`${cowinAPI}/appointment/sessions/public/findByPin?pincode=${pincode}&date=${getCorrectDateFormat(selectedDate)}`);
+            setSearchResults(sessions);
             setLoading(false);
         } catch (error) {
             setError('Some unexpected error while fetching the data');
             setLoading(false);
         }
+    }
+
+    const isToday = (someDate) => {
+        const today = new Date();
+        return someDate.getDate() === today.getDate() &&
+            someDate.getMonth() === today.getMonth() &&
+            someDate.getFullYear() === today.getFullYear()
     }
 
     const handlePinSubmit = () => {
@@ -44,7 +51,7 @@ const SearchByPin = () => {
             return;
         }
         const currentDate = new Date();
-        if (!(new Date(selectedDate) > currentDate)) {
+        if (new Date(selectedDate) < currentDate && !isToday(new Date(selectedDate))) {
             setError('Please select a valid date');
             return;
         }
@@ -62,7 +69,7 @@ const SearchByPin = () => {
                 onChange={(event) => setPincode(event.target.value)}
             />
             { pincode !== '' && (
-                <div>
+                <>
                     <label className='input-label' htmlFor="date-availability">Select a date:</label>
                     <input
                         className='select-input'
@@ -72,7 +79,7 @@ const SearchByPin = () => {
                         value={selectedDate}
                         onChange={(event) => setSelectedDate(event.target.value)}
                     />
-                </div>
+                </>
             )}
             { selectedDate !== '' && (
                 <div className='submit-search-by-pin-wrapper'>
@@ -81,7 +88,7 @@ const SearchByPin = () => {
             )}
             
             {error !== '' && <p className='error-message'>{error}</p>}
-            {searchResults.length === 0 && searched && loading !== true && <h2>No centers found.</h2>}
+            {searchResults.length === 0 && searched && loading !== true && <h2 style={{ textAlign: 'center' }}>No centers found.</h2>}
             {loading && <ClipLoader color={'blue'} loading={loading} css={loaderStyle} size={50} /> }
             {searchResults.length !== 0 && (
                 <SearchLists results={searchResults} />
