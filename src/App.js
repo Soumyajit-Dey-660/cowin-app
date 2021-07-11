@@ -5,6 +5,9 @@ import Header from './components/Header/Header';
 import Search from './components/Search/Search';
 import DashBoard from './components/Dashboard/Dashboard';
 import Footer from './components/Footer/Footer';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 const App = () => {
   return (
@@ -17,7 +20,7 @@ const App = () => {
             <Route exact path='/search' component={Search} />
             <Route exact path='/dashboard' component={DashBoard} />
           </Switch>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
   );

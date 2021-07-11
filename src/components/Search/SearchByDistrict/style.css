@@ -1,44 +1,50 @@
 .search-by-district {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
+  display: block;
+  margin-top: 20vh;
 }
 
 .select-input {
-    width: 100%;
-    padding: 0 5px;
-    margin-top: 10px;
-    margin-bottom: 25px;
+  width: 100%;
+  padding: 0 5px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.submit-search-by-district-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  margin-bottom: 40px;
 }
 
 .submit-search-by-district {
-    width: 60%;
-    padding: 3px;
-    border-radius: 2rem;
-    margin: 20px auto;
-    border: 1px solid black;
+  width: 50%;
+  padding: 3px;
+  border-radius: 2rem;
+  border: 1px solid black;
 }
 
 .submit-search-by-district:hover {
-    transition: 0.3s;
-    background: rgb(53, 53, 53);
-    color: #fff;
+  transition: 0.3s;
+  background: rgb(53, 53, 53);
+  color: #fff;
 }
 
 .error-message {
-    margin: 10px 0px;
-    color: #D8000C;
-    margin: 0 auto;
+  margin: 10px 0px;
+  color: #d8000c;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 400px) {
-    .select-input  {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-    .input-label {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+  .select-input {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .input-label {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

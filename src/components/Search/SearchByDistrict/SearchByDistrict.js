@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './style.css';
 import axios from 'axios';
-import { cowinAPI } from '../../../apiConstants';
+import { cowinAPI } from '../../../constants/apiConstants';
 import SearchLists from '../SearchLists/SearchLists';
 
 const SearchByDistrict = () => {
@@ -12,15 +12,24 @@ const SearchByDistrict = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [error, setError] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [searched, setSearched] = useState(false);
 
     const getStates = async () => {
-        const { data: { states } } = await axios.get(`${cowinAPI}/admin/location/states`);
-        setAllStates(states);
+        try {
+            const { data: { states } } = await axios.get(`${cowinAPI}/admin/location/states`);
+            setAllStates(states);
+        } catch (error) {
+            setError('Some error occured while fetching the data');
+        }
     }
 
     const getDistricts = async () => {
-        const { data: { districts } } = await axios.get(`${cowinAPI}/admin/location/districts/${selectedState}`);
-        setAllDistricts(districts);
+        try {
+            const { data: { districts } } = await axios.get(`${cowinAPI}/admin/location/districts/${selectedState}`);
+            setAllDistricts(districts);
+        } catch(error) {
+            setError('Some error occured while fetching the data');
+        }
     }
 
     const getCorrectDateFormat = () => {
@@ -46,6 +55,7 @@ const SearchByDistrict = () => {
         }
         setError('');
         getSearchResults();
+        setSearched(true);
     }
 
     useEffect(() => {
@@ -106,13 +116,16 @@ const SearchByDistrict = () => {
             )}
             {error && <p className='error-message'>{error}</p>}
             { selectedDate !== '' && (
-                <button className='submit-search-by-district' onClick={submitSearch}>Search</button>
-            )}
-                {searchResults.length !== 0 && (
-                <div>
-                    <SearchLists results={searchResults}  />
+                <div className='submit-search-by-district-wrapper'>
+                    <button className='submit-search-by-district' onClick={submitSearch}>Search</button>
                 </div>
-                )}
+            )}
+            {searchResults.length !== 0 && (
+                <SearchLists results={searchResults}  />
+            )}
+            {searchResults.length === 0 && searched && (
+                <h2>No Slots available. Try a different date.</h2>
+            )}
         </div>
     )
 }
