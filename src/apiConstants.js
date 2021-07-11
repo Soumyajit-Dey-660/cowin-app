@@ -1,0 +1,1 @@
+export const cowinAPI = `https://cdn-api.co-vin.in/api/v2`;

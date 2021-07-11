@@ -1,0 +1,22 @@
+.search-by-pin {
+    display: flex;
+    flex-direction: column;
+}
+
+.pin-input-box {
+    width: 100%;
+    padding: 5px;
+    margin: 15px 0;
+}
+
+.submit-search-by-pin {
+    padding: 3px;
+    border-radius: 2rem;
+    border: 1px solid black;
+}
+
+.submit-search-by-pin:hover {
+    transition: 0.3s;
+    background: rgb(53, 53, 53);
+    color: #fff;
+}

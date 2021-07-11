@@ -1,0 +1,75 @@
+.home {
+    height: calc(100vh - 16vh);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vaccination-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.emphasis-text {
+    color: var(--mainText);
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.lower-emphasis-text {
+    margin-bottom: 30px;
+    color: var(--mainText);
+}
+
+.info-text {
+    color: var(--mainText);
+    margin-bottom: 30px;
+}
+
+.call-to-action {
+    margin: 30px 0;
+    width: 40%;
+    height: 2.5em;
+    border-radius: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.call-to-action:hover {
+    transition: 0.3s;
+    background: rgb(53, 53, 53);
+    color: #fff;
+}
+
+#vaccination {
+  display: block;
+  margin: 10px 50px;
+  height: 500px;
+  width: 500px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 900px) {
+    #vaccination {
+        height: 400px;
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .home {
+        flex-direction: column;
+        height: 100vh;
+    }
+    #vaccination {
+        height: 300px;
+        width: 300px;
+        margin-bottom: 50px;
+        padding: 30px;
+    }
+}
