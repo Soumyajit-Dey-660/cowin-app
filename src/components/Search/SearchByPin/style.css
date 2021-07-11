@@ -20,3 +20,48 @@
     background: rgb(53, 53, 53);
     color: #fff;
 }
+
+.error-message {
+  color: #d8000c;
+  margin: 10px auto;
+}
+
+.select-input {
+  width: 100%;
+  padding: 0 5px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.submit-search-by-pin-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  margin-bottom: 40px;
+}
+
+.submit-search-by-pin {
+  width: 50%;
+  padding: 3px;
+  border-radius: 2rem;
+  border: 1px solid black;
+}
+
+.submit-search-by-pin:hover {
+  transition: 0.3s;
+  background: rgb(53, 53, 53);
+  color: #fff;
+}
+
+@media screen and (max-width: 400px) {
+  .select-input {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .input-label {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './style.css';
 import axios from 'axios';
+import ClipLoader from "react-spinners/ClipLoader";
 import { cowinAPI } from '../../../constants/apiConstants';
 import SearchLists from '../SearchLists/SearchLists';
 
@@ -13,22 +14,34 @@ const SearchByDistrict = () => {
     const [error, setError] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [searched, setSearched] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const loaderStyle = `
+        display: block;
+        margin: 0 auto;
+`;
 
     const getStates = async () => {
         try {
+            setLoading(true)
             const { data: { states } } = await axios.get(`${cowinAPI}/admin/location/states`);
             setAllStates(states);
+            setLoading(false);
         } catch (error) {
             setError('Some error occured while fetching the data');
+            setLoading(false);
         }
     }
 
     const getDistricts = async () => {
         try {
+            setLoading(true);
             const { data: { districts } } = await axios.get(`${cowinAPI}/admin/location/districts/${selectedState}`);
             setAllDistricts(districts);
+            setLoading(false);
         } catch(error) {
             setError('Some error occured while fetching the data');
+            setLoading('false');
         }
     }
 
@@ -40,14 +53,18 @@ const SearchByDistrict = () => {
     }
 
     const getSearchResults = async () => {
-        const { data: { sessions } } = await axios.get(`${cowinAPI}/appointment/sessions/public/findByDistrict?district_id=${selectedDistrict}&date=${getCorrectDateFormat(selectedDate)}`);
-        setSearchResults(sessions);
-
+        try {
+            setLoading(true);
+            const { data: { sessions } } = await axios.get(`${cowinAPI}/appointment/sessions/public/findByDistrict?district_id=${selectedDistrict}&date=${getCorrectDateFormat(selectedDate)}`);
+            setSearchResults(sessions);
+            setLoading(false);
+        } catch(error) {
+            setError('Some error occured while fetching the data');
+            setLoading(false);
+        }
     }
 
     const submitSearch = () => {
-        console.log(getCorrectDateFormat(selectedDate));
-        console.log(selectedDistrict);
         const currentDate = new Date();
         if(!(new Date(selectedDate) > currentDate)) {
             setError('Please select a valid date');
@@ -120,10 +137,11 @@ const SearchByDistrict = () => {
                     <button className='submit-search-by-district' onClick={submitSearch}>Search</button>
                 </div>
             )}
+            {loading && <ClipLoader color={'blue'} loading={loading} css={loaderStyle} size={50} />}
             {searchResults.length !== 0 && (
                 <SearchLists results={searchResults}  />
             )}
-            {searchResults.length === 0 && searched && (
+            {searchResults.length === 0 && loading !== true && searched && (
                 <h2>No Slots available. Try a different date.</h2>
             )}
         </div>
